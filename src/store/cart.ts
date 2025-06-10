@@ -13,21 +13,21 @@ export const useCart = create<Store>()((set) => ({
   open: false,
   setOpen: (open) => set((state) => ({ ...state, open })),
   items: [],
-  addItem: (item) =>
+  addItem: (newItem) =>
     set((state) => {
       const cloneItems = [...state.items];
       const existing = state.items.find(
-        (item) => item.productId === item.productId
+        (item) => newItem.productId === item.productId
       );
 
       if (existing) {
         for (let key in cloneItems) {
-          if (cloneItems[key].productId === item.productId) {
-            cloneItems[key].quantity += item.quantity;
+          if (cloneItems[key].productId === newItem.productId) {
+            cloneItems[key].quantity += newItem.quantity;
           }
         }
       } else {
-        cloneItems.push(item);
+        cloneItems.push(newItem);
       }
 
       return { ...state, items: cloneItems };

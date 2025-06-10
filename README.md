@@ -38,6 +38,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Prisma
 
 Commands
+npx prisma db seed - Para executar o seed a alimentar o banco com dados iniciais
 npx prisma init - Inicialização do prisma
 npx prisma format - Ajusta o schema
 npx prisma migrate dev - Criar e executar migrations

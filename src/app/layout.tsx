@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Cart } from "@/components/cart/cart";
+import { LoginAreaDialog } from "@/components/login-area/login-area-dialog";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
         <Cart />
+        <LoginAreaDialog />
       </body>
     </html>
   );

@@ -6,6 +6,7 @@ import { useProducts } from "@/store/products";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { CartProduct } from "./cart-product";
+import { useAuth } from "@/store/auth";
 
 export const CartList = () => {
   const cart = useCart();
@@ -13,6 +14,8 @@ export const CartList = () => {
 
   const [subTotal, setSubTotal] = useState(0);
   const [shippingCost, setShippingCost] = useState(10);
+
+  const { token, setOpen } = useAuth();
 
   const calculateSubtotal = () => {
     let sub = 0;
@@ -47,7 +50,14 @@ export const CartList = () => {
           Total: {decimalToMoney(subTotal + shippingCost)}
         </div>
       </div>
-      <Button>Finalizar compra</Button>
+      {token && (
+        <Button className="bg-green-700 hover:bg-green-900">
+          Finalizar compra
+        </Button>
+      )}
+      {!token && (
+        <Button onClick={() => setOpen(true)}>Login / Cadastro</Button>
+      )}
     </>
   );
 };

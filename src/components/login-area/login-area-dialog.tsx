@@ -2,10 +2,13 @@
 
 import { useAuth } from "@/store/auth";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { ArrowLeft, Divide } from "lucide-react";
 import { LoginAreaStepEmail } from "./login-area-step-email";
+import { LoginAreaStepSignup } from "./login-area-step-signup";
+import { LoginAreaStepSignIn } from "./login-area-step-signin";
+import { getCookie } from "cookies-next/client";
 
 type Steps = "EMAIL" | "SIGNUP" | "SIGNIN";
 
@@ -13,7 +16,15 @@ export const LoginAreaDialog = () => {
   const [step, setStep] = useState<Steps>("EMAIL");
   const [emailField, setEmailField] = useState("");
 
-  const { open, setOpen } = useAuth();
+  const { open, setOpen, setToken } = useAuth();
+
+  useEffect(() => {
+    const token = getCookie("token");
+
+    if (token) {
+      setToken(token);
+    }
+  }, []);
 
   const handleStepEmail = (hasEmail: boolean, email: string) => {
     setEmailField(email);
@@ -48,8 +59,8 @@ export const LoginAreaDialog = () => {
           {step === "EMAIL" && (
             <LoginAreaStepEmail onValidate={handleStepEmail} />
           )}
-          {step === "SIGNIN" && <div>Login</div>}
-          {step === "SIGNUP" && <div>Cadastro</div>}
+          {step === "SIGNIN" && <LoginAreaStepSignIn email={emailField} />}
+          {step === "SIGNUP" && <LoginAreaStepSignup email={emailField} />}
         </div>
       </DialogContent>
     </Dialog>

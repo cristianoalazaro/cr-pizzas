@@ -15,8 +15,9 @@ export const decimalToMoney = (price: string | number | Prisma.Decimal) => {
   });
 };
 
-export const checkFieldError = (fieldName: string, errors: any) => {
+export const checkFieldErrors = (fieldName: string, errors: any) => {
   if (errors === null) return false;
+  console.log(errors);
   if (!errors[fieldName]) return false;
 
   return errors[fieldName][0];

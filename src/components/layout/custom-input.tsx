@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 import { Input } from "../ui/input";
-import { checkFieldError } from "@/lib/utils";
+import { checkFieldErrors } from "@/lib/utils";
 
 type Props = ComponentProps<"input"> & {
   name: string;
@@ -8,7 +8,7 @@ type Props = ComponentProps<"input"> & {
 };
 
 export const CustomInput = (props: Props) => {
-  const error = checkFieldError(props.name, props.errors);
+  const error = checkFieldErrors(props.name, props.errors);
 
   return (
     <>
